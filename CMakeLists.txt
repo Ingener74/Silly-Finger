@@ -27,13 +27,23 @@ set(SillyFinger_SOURCES
 
 add_definitions(-std=c++11)
 
-add_executable(SillyFinger ${SillyFinger_SOURCES})
+if(WIN32)
+	list(APPEND SillyFinger_SOURCES res/resources.rc)
+	add_executable(SillyFinger WIN32 ${SillyFinger_SOURCES})
+else()
+	add_executable(SillyFinger ${SillyFinger_SOURCES})
+endif()
 
 target_link_libraries(SillyFinger Qt5::Widgets Qt5::Core)
 
 install(TARGETS SillyFinger DESTINATION bin)
 
-set(CPACK_GENERATOR "ZIP")
+if(WIN32)
+	set(CPACK_GENERATOR "NSIS")
+else()
+	set(CPACK_GENERATOR "ZIP")
+endif()
+
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Shnaider Pavel") #required
  
 include(CPack)

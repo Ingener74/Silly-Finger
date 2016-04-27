@@ -7,7 +7,6 @@
 
 #include <iostream>
 #include <stdexcept>
-#include <unistd.h>
 
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QMessageBox>
