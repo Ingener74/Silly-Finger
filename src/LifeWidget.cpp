@@ -9,28 +9,9 @@
 using namespace std;
 
 LifeWidget::LifeWidget(QWidget* parent, Qt::WindowFlags f) {
-
     setMinimumSize(m_side * m_cols + 1, m_side * m_rows + 1);
-
     resizeAndClear(m_world, m_rows, m_cols);
-
-    m_world[3][2] = 1;
-    m_world[3][3] = 1;
-    m_world[3][4] = 1;
-    m_world[4][3] = 1;
-
-    m_world[4][5] = 1;
-    m_world[4][6] = 1;
-    m_world[4][7] = 1;
-    m_world[4][8] = 1;
-
-    m_world[12][8] = 1;
-    m_world[12][7] = 1;
-    m_world[13][8] = 1;
-
-    m_world[15][7] = 1;
-    m_world[15][8] = 1;
-    m_world[15][9] = 1;
+    randomize();
 }
 
 LifeWidget::~LifeWidget() {
@@ -99,6 +80,31 @@ void LifeWidget::iterate() {
     repaint();
 }
 
+void LifeWidget::randomize() {
+    for (int i = 0; i < m_randomCount; /*++i*/) {
+        int random_row = static_cast<int>(m_rows * (rand() / double(RAND_MAX)));
+        int random_col = static_cast<int>(m_cols * (rand() / double(RAND_MAX)));
+        if (m_world[random_row][random_col] == 0) {
+            m_world[random_row][random_col] = 1;
+            ++i;
+        }
+    }
+}
+
+void LifeWidget::setCols(int cols) {
+    m_cols = cols;
+    setMinimumSize(m_side * m_cols + 1, m_side * m_rows + 1);
+    resizeAndClear(m_world, m_rows, m_cols);
+    randomize();
+}
+
+void LifeWidget::setRows(int rows) {
+    m_rows = rows;
+    setMinimumSize(m_side * m_cols + 1, m_side * m_rows + 1);
+    resizeAndClear(m_world, m_rows, m_cols);
+    randomize();
+}
+
 void LifeWidget::resizeAndClear(vector<vector<int> >& world, int rows, int cols) {
     world.resize(rows);
     for (auto& i : world)
@@ -130,7 +136,6 @@ int LifeWidget::getNeighbors(const vector<vector<int>>& world, int rows, int col
         int c = col + offset[o][1];
 
         r = r >= rows ? 0 : r < 0 ? rows - 1 : r;
-
         c = c >= cols ? 0 : c < 0 ? cols - 1 : c;
 
         neighbors += world[r][c];

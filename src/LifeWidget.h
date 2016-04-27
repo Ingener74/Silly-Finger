@@ -16,8 +16,29 @@ public:
 
 public slots:
     void iterate();
+    void randomize();
+
+    int randomCount() const {
+        return m_randomCount;
+    }
+    void setRandomCount(int randomCount) {
+        m_randomCount = randomCount;
+    }
+
+    int getCols() const {
+        return m_cols;
+    }
+
+    void setCols(int cols = 40);
+
+    int getRows() const {
+        return m_rows;
+    }
+
+    void setRows(int rows = 40);
 
 private:
+    int m_randomCount = 20 * 20;
 
     int m_x = -1; int m_y = -1;
 

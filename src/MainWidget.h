@@ -23,5 +23,9 @@ public:
 private:
     LifeWidget* m_life = nullptr;
     QTimer* m_timer = nullptr;
+    int m_speed = 0;
+
 public slots:
+    void speedValue(int speed);
+    void speedReleased();
 };
