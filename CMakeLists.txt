@@ -30,3 +30,10 @@ add_definitions(-std=c++11)
 add_executable(SillyFinger ${SillyFinger_SOURCES})
 
 target_link_libraries(SillyFinger Qt5::Widgets Qt5::Core)
+
+install(TARGETS SillyFinger DESTINATION bin)
+
+set(CPACK_GENERATOR "ZIP")
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Shnaider Pavel") #required
+ 
+include(CPack)
