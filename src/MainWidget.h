@@ -16,8 +16,6 @@ public:
     MainWidget(QWidget* parent = 0, Qt::WindowFlags f = 0);
     virtual ~MainWidget();
 
-    virtual void showEvent(QShowEvent *);
-    virtual void closeEvent(QCloseEvent *);
     virtual void keyPressEvent(QKeyEvent *);
 
 private:

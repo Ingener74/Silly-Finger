@@ -44,12 +44,6 @@ MainWidget::~MainWidget() {
     delete m_timer;
 }
 
-void MainWidget::closeEvent(QCloseEvent*) {
-}
-
-void MainWidget::showEvent(QShowEvent*) {
-}
-
 void MainWidget::keyPressEvent(QKeyEvent* e) {
     if (e->key() == Qt::Key_Escape) {
         close();
